@@ -1,0 +1,24 @@
+/* CSS */
+
+ * {
+     font-family: sans-serif;
+ }
+code {
+    background-color: lightgray;
+}
+
+button {
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding: 5px;
+}
+
+
+
+#pageWrapper {
+    margin: 45px 15px 0px;
+}
+
+h1, h4 {
+    text-align: center;
+}

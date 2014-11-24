@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    
+    <title>100 Doors Puzzle</title>
+    </head>
+<body>
+    <div id="pageWrapper">
+
+       <h1> 100 Doors</h1>
+
+       <h4>Taken from <a href="http://rosettacode.org/"><em>RosettaCode.org</em></a></h4>
+
+       <p><strong>Problem:</strong> You have 100 doors in a row that are all initially closed. You make 100 passes by the doors. The first time through, you visit every door and toggle the door (if the door is closed, you open it; if it is open, you close it). The second time you only visit every 2nd door (door #2, #4, #6, ...). The third time, every 3rd door (door #3, #6, #9, ...), etc, until you only visit the 100th door.</p>
+       <p><strong>Question: </strong> What state are the doors in after the last pass? Which are open, which are closed?</p>
+
+       <p>First I'll create the door object and make an empty array to stick them in. I realize I don't have to create an object for this. Instead, I could just put boolean values in my array. However, I want each door to have a door number property. I'll make each door have a door number and an open property. All doors start out closed.</p>
+       <code>
+        // sets up a function to create the Door object <br>
+        var Door = function (doorNum, open) { <br>
+            &nbsp;this.doorNum = doorNum;<br>
+            &nbsp;this.open = false;<br>
+        };
+        <br> <br>
+        // array that stores the doors<br>
+        &nbsp;var doors = [];
+       </code>
+
+       <p>Next, I'll ceate a function that creates 100 doors and puts them into the array. Once again, all doors start out closed so a second value doesn't need to be passed in this function. </p>
+
+       <code>
+       // makes 100 doors and puts them in the door array
+        var makeAllDoors = function () {<br>
+        &nbsp; while(doors.length &lt; 100) {<br>
+        &nbsp; doors[doors.length] = new Door(doors.length  + 1);<br>
+        &nbsp;
+        }<br>
+    };
+       </code>
+
+        <p>Finally, I'll create a function that a: passes through each door, opening and closing the correct doors and, b: does this 100 times.</p>
+        <p>The first thing to do is to make a pass varible that counts what number pass I'm on. I'll also use this to tell my inside loop which doors to open or close. I'll use the pass varible to create a while loop that wraps around the rest of the function. Each time a pass is completed the pass varible is increased by one.</p>
+        <code>
+        var pass = function () {<br>
+            &nbsp;var passes = 1;<br>
+            &nbsp;while (passes &lt;= 100) {<br>
+            &nbsp;// Do all my door stuff here <br> 
+          &nbsp;}<br>
+        &nbsp; passes += 1; <br>
+       }
+        </code>
+
+        <p>The last part of this function is to do the following is to, a: find doors with mutiples of the current pass number and, b: if the door is open, close it. if the door is closed, open it. </p>
+        <code>
+            for (var currentDoor = passes - 1; currentDoor &lt;= doors.length - 1; currentDoor += passes){<br>
+                &nbsp;doors[currentDoor].open = !(doors[currentDoor].open);<br>
+            }
+        </code>
+        <p>The final function looks like this:</p>
+        <code>
+
+        var pass = function () { <br>
+        &nbsp;var passes = 1; <br>
+        &nbsp;while (passes &lt;= 100) { <br>
+            &nbsp;&nbsp;for (var currentDoor = passes - 1; currentDoor <= doors.length - 1; currentDoor += passes){ <br>
+               &nbsp;&nbsp;&nbsp; doors[currentDoor].open = !(doors[currentDoor].open); <br>
+           &nbsp; } <br>
+             &nbsp;passes += 1; <br>
+        &nbsp;} <br>
+    };
+        </code>
+
+        <p>The only thing left to do is run the two functions and either put them on the current page or print to the console. I'll put them in a div on the current page.</p>
+
+        <button onclick='playGame()'>Run</button>
+
+
+        <div id="answer"></div>
+    </div> <!-- pageWrapper -->
+    <script src="script.js"></script>
+    </body>
+
+</html>
